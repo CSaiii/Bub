@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    /* FLOATING HEARTS BACKGROUND */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 77, 109, 0.6);
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(110vh) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 420px;
+      max-height: 80vh;          /* 👈 SCROLL LIMIT */
+      overflow-y: auto;          /* 👈 ENABLE SCROLL */
+      animation: pop 1s ease;
+      z-index: 2;
+    }
+
+    /* Custom scrollbar (cute but subtle) */
+    .card::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .card::-webkit-scrollbar-thumb {
+      background: #f4a3b4;
+      border-radius: 10px;
+    }
+
+    h1 {
+      color: #e63946;
+      font-size: 2.3em;
+    }
+
+    p {
+      font-size: 1.1em;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background: #e63946;
+      color: white;
+      left: 60px;
+    }
+
+    #noBtn {
+      background: #999;
+      color: white;
+      right: 60px;
+    }
+
+    #loveMessage {
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    #loveMessage img {
+      margin-top: 15px;
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEART BACKGROUND -->
+  <div class="hearts" id="hearts"></div>
+
+  <div class="card">
+    <h1>Hi, bub. ❤️</h1>
+    <p>Will you be my Valentines for the third time?</p>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+      <button id="noBtn" onmouseover="runAway()">No 💔</button>
+    </div>
+
+    <div id="loveMessage">
+      <h2>YEYYYYYYYYYY I LOVE YOU 🥹❤️</h2>
+      <p>
+        Thank you for choosing me —— us always. <br><br>
+        Mahal kita, palagi azumi. Thank you for always fighting for us, for staying even during the times when you
+        were hurting and not receiving what you deserved. <br><br>
+        I want you to know that I will always be here for you. Even when I can't be there physically, my heart is always with you bub.
+        I'm your number one fan, your safe place, your chipmunkkkkk, and someone who will choose you every single day. <br><br>
+        Thank you for holding on when things felt heavy. Hindi talaga natin kaya sukuan ang isa't isa ano? <br><br>
+       💕 So once again, with all my heart (isama mo na valorant account ko) will you be my Valentines, bub?💕
+      </p>
+
+      <img src="bub.jpg" alt="Us together 💕">
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="music" loop>
+    <source src="tingin.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function runAway() {
+      const noBtn = document.getElementById("noBtn");
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function sayYes() {
+      document.getElementById("music").play();
+      document.getElementById("loveMessage").style.display = "block";
+      createHearts();
+    }
+
+    function createHearts() {
+      const hearts = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (16 + Math.random() * 20) + "px";
+        heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+        hearts.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 10000);
+      }, 350);
+    }
+  </script>
+
+</body>
+</html>
